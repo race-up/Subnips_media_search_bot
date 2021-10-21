@@ -106,11 +106,11 @@ async def filter(client, message):
 
 @Client.on_message(filters.command("req", "!") & filters.group & filters.chat(AUTH_GROUPS) if AUTH_GROUPS else filters.command("req", "!") & filters.group)
 async def group(client, message):
-    if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
+    if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text.split(None, 1)[1]):
         return
-    if 2 < len(message.text) < 50:    
+    if 2 < len(message.text.split(None, 1)[1]) < 50:    
         btn = []
-        search = message.text
+        search = message.text.split(None, 1)[1]
         nyva=BOT.get("username")
         if not nyva:
             botusername=await client.get_me()
